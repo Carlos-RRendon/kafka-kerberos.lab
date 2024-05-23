@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: kafka_poc
+
+  kafka:
+    mock: true
+    bootstrap-servers: localhost:9092
+
+    audit-trials:
+      topic: audit-topic
+    event-logs:
+      topic: event-topic
