@@ -1,5 +1,19 @@
 services:
-  
+
+  kerberos:
+    container_name: kdc-server
+    hostname: kdc-server
+    image: altinity/kdc-server:latest
+    volumes:
+      # This is needed otherwise there won't be enough entropy to generate a new kerberos realm
+      - /dev/urandom:/dev/random
+      - ./configs/secrets:/tmp/secrets
+    ports:
+      - "749:749"
+      - "88:88/udp"
+    networks:
+      - altinity_default
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: cp-zookeeper
@@ -12,12 +26,12 @@ services:
       ZOOKEEPER_AUTHPROVIDER_SASL: org.apache.zookeeper.server.auth.SASLAuthenticationProvider
       KAFKA_OPTS: -Djava.security.auth.login.config=/etc/zookeeper/secrets/zookeeper_jaas.conf -Djava.security.krb5.conf=/etc/zookeeper/secrets/krb5.conf
     ports:
-      - 22181:2181
+      - "2181:2181"
     volumes:
       - ./configs/secrets:/etc/zookeeper/secrets
     networks:
       - altinity_default
-  
+
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: cp-kafka
@@ -25,8 +39,8 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
-      - 29093:29093
+      - "29092:29092"
+      - "29093:29093"
     environment:
       KAFKA_BROKER_ID: "1"
       KAFKA_ZOOKEEPER_CONNECT: cp-zookeeper:2181
@@ -42,20 +56,8 @@ services:
       - ./configs/secrets:/etc/kafka/secrets
     networks:
       - altinity_default
-  
-  kerberos:
-    container_name: kdc-server
-    hostname: kdc-server
-    image: altinity/kdc-server:latest
-    volumes:
-      # This is needed otherwise there won't be enough entropy to generate a new kerberos realm
-      - /dev/urandom:/dev/random
-      - ./configs/secrets:/tmp/secrets
-    ports:
-      - "749:749"
-      - "88:88/udp"
-    networks:
-      - altinity_default
+
+
 
 
 networks:

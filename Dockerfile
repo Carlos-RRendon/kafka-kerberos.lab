@@ -15,5 +15,5 @@ ENV DOMAIN_REALM ${DOMAIN_REALM:-altinity_default}
 ENV KADMIN_PRINCIPAL ${KADMIN_PRINCIPAL:-kadmin}
 ENV KADMIN_PASSWORD ${KADMIN_PASSWORD:-admin}
 
-COPY init-script-kdc.sh /tmp/
-CMD /tmp/init-script-kdc.sh
+COPY init-script.sh /tmp/
+CMD /tmp/init-script.sh

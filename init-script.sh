@@ -9,7 +9,7 @@ ADMIN_PRINCIPAL_FULL=$KADMIN_PRINCIPAL@$REALM
 echo "REALM: $REALM"
 echo "ADMIN_PRINCIPAL_FULL: $ADMIN_PRINCIPAL_FULL"
 echo "KADMIN_PRINCIPAL: $KADMIN_PRINCIPAL"
-echo "ADMIN_PASSWORD: $ADMIN_PASSWORD"
+echo "ADMIN_PASSWORD: $KADMIN_PASSWORD"
 echo ""
 
 echo "==================================================================================="
@@ -106,8 +106,8 @@ kadmin.local -q "ktadd -norandkey -k /tmp/secrets/kerberized_kafka.keytab kafka/
 kadmin.local -q "addprinc -randkey zkclient@${REALM}"
 kadmin.local -q "ktadd -norandkey -k /tmp/secrets/zkclient.keytab zkclient@${REALM}"
 
-kadmin.local -q "addprinc -randkey user1@${REALM}"
-kadmin.local -q "ktadd -norandkey -k /tmp/secrets/clickhouse.keytab user1@${REALM}"
+#kadmin.local -q "addprinc -randkey user1@${REALM}"
+#kadmin.local -q "ktadd -norandkey -k /tmp/secrets/clickhouse.keytab user1@${REALM}"
 
 chmod 644 /tmp/secrets/*.*
 
