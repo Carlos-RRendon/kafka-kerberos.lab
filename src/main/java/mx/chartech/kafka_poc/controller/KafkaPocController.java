@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class KafkaPocController {
 
-
+   private final IKafkaPocService kafkaPocService;
 
     @PostMapping("/")
     public ResponseEntity kafkaPoc(){
-        log.info("Kafka Poc");
-
+        kafkaPocService.sendAudit("AUDIT MESSAGE");
+        kafkaPocService.sendLogs("LOGS MESSAGE");
         return ResponseEntity.ok("Kafka Poc");
     }
 

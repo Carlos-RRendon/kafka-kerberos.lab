@@ -7,19 +7,19 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
-
 @Slf4j
 @Configuration
-public class KafkaTemplateInterceptor  implements ProducerInterceptor<String,String> {
+public class KafkaTemplateInterceptor implements ProducerInterceptor<String, String> {
+
     @Override
     public ProducerRecord<String, String> onSend(ProducerRecord<String, String> producerRecord) {
-        log.info("PRODUCER MESSAGE: {}", producerRecord);
+        log.debug("PRODUCER MESSAGE: {}", producerRecord);
         return producerRecord;
     }
 
     @Override
     public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
-        log.info("ACKNOWLEDGEMENT: {}", recordMetadata);
+        log.debug("ACKNOWLEDGEMENT: {}", recordMetadata);
     }
 
     @Override

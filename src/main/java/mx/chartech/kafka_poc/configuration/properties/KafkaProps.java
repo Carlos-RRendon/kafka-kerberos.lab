@@ -5,11 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "kafka")
 @Data
+@ConfigurationProperties(prefix = "spring.kafka")
 public class KafkaProps {
     private boolean mock;
     private String bootstrapServers;
-    private Audit auditTrials;
-    private Event eventLogs;
+    private String auditTrialsTopic;
+    private String eventLogsTopic;
 }
