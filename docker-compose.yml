@@ -48,7 +48,7 @@ services:
       # https://docs.confluent.io/platform/current/kafka/multi-node.html#configure-multi-node-environment
       KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://cp-kafka:29092,LISTENER_EXTERNAL://localhost:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_INTERNAL
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_INTERNAL:PLAINTEXT, LISTENER_EXTERNAL:PLAINTEXT
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_INTERNAL:PLAINTEXT, LISTENER_EXTERNAL:SASL_PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_OPTS: -Djava.security.auth.login.config=/etc/kafka/secrets/broker_jaas.conf -Djava.security.krb5.conf=/etc/kafka/secrets/krb5.conf
     volumes:
