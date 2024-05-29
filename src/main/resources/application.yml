@@ -7,6 +7,23 @@ spring:
     bootstrap-servers: localhost:9092
     audit-trials-topic: audit-topic
     event-logs-topic: event-topic
+    security:
+      protocol: SASL_SSL
+    sasl:
+      mechanism: GSSAPI
+      jaas:
+        control-flag: required
+        login-module: com.sun.security.auth.module.Krb5LoginModule
+        enabled: true
+        options:
+          debug: true
+          useKeytab: true
+          storeKey: true
+          keyTab: file://zkclient.keytab
+          principal: "zkclient@ALTINITY.TEST"
+          serviceName: kafka
+
+
 
 
 
